@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_6/features/models/expense.dart';
 import 'package:my_flutter_6/features/screens/expense_form_screen.dart';
 import 'package:my_flutter_6/features/screens/expenses_list_screen.dart';
+import 'package:my_flutter_6/features/screens/images_screen.dart';
 
-enum Screen { list, form }
+enum Screen { list, form, images }
 
 class ExpensesContainer extends StatefulWidget {
   const ExpensesContainer({super.key});
@@ -22,6 +23,10 @@ class _ExpensesContainerState extends State<ExpensesContainer> {
 
   void _showForm() {
     setState(() => _currentScreen = Screen.form);
+  }
+
+  void _showImages() {
+    setState(() => _currentScreen = Screen.images);
   }
 
   void _addExpense({
@@ -66,6 +71,8 @@ class _ExpensesContainerState extends State<ExpensesContainer> {
           onSave: _addExpense,
           onCancel: _showList,
         );
+      case Screen.images:
+        return const ImagesScreen();
     }
   }
 }

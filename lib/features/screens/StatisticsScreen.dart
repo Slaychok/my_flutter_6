@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_6/features/models/expense.dart';
+import 'package:my_flutter_6/features/widgets/app_inherited_widget.dart';
 
 class StatisticsScreen extends StatelessWidget {
   final List<Expense> expenses;
@@ -24,6 +25,9 @@ class StatisticsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appState = AppInheritedWidget.of(context).appState;
+    final expenses = appState.expenses;
+
     final categoryTotals = _calculateCategoryTotals();
 
     return Scaffold(

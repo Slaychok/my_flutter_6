@@ -1,10 +1,10 @@
+// config/router.dart
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:my_flutter_6/features/screens/categories_screen.dart';
+import 'package:my_flutter_6/features/screens/statistics_screen.dart';
 import 'package:my_flutter_6/features/screens/images_screen.dart';
 import 'package:my_flutter_6/features/state/expenses_container.dart';
-
-import '../features/screens/CategoriesScreen.dart';
-import '../features/screens/StatisticsScreen.dart';
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
@@ -24,7 +24,7 @@ class AppRouter {
           GoRoute(
             path: 'statistics',
             builder: (BuildContext context, GoRouterState state) {
-              return StatisticsScreen(expenses: []);
+              return const StatisticsScreen();
             },
           ),
           GoRoute(

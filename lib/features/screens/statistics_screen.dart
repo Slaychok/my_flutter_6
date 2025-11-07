@@ -1,30 +1,18 @@
+// features/screens/statistics_screen.dart
 import 'package:flutter/material.dart';
-import 'package:my_flutter_6/features/models/expense.dart';
+import 'package:my_flutter_6/features/widgets/app_inherited_widget.dart';
 
 class StatisticsScreen extends StatelessWidget {
-  final List<Expense> expenses;
-
-  const StatisticsScreen({Key? key, required this.expenses}) : super(key: key);
-
-  Map<String, double> _calculateCategoryTotals() {
-    final Map<String, double> categoryTotals = {};
-    for (final expense in expenses) {
-      categoryTotals.update(
-        expense.category,
-            (value) => value + expense.amount,
-        ifAbsent: () => expense.amount,
-      );
-    }
-    return categoryTotals;
-  }
-
-  double get totalAmount {
-    return expenses.fold(0, (sum, expense) => sum + expense.amount);
-  }
+  const StatisticsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final categoryTotals = _calculateCategoryTotals();
+    // Используем InheritedWidget для получения данных
+    final appState = AppInheritedWidget.of(context).appState;
+    final expenses = appState.expenses;
+    final categoryTotals = appState.getCategoryTotals();
+    final totalAmount = appState.totalAmount;
+
     final sortedCategories = categoryTotals.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
 

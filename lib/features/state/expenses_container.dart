@@ -1,7 +1,11 @@
+// features/state/expenses_container.dart
 import 'package:flutter/material.dart';
 import 'package:my_flutter_6/features/models/expense.dart';
-import 'package:my_flutter_6/features/screens/expense_form_screen.dart';
-import 'package:my_flutter_6/features/screens/expenses_list_screen.dart';
+import '../screens/expenses_list_screen.dart';
+import '../screens/expense_form_screen.dart';
+import 'app_state.dart';
+import '../../di/locator.dart';
+import '../widgets/app_inherited_widget.dart';
 
 enum Screen { list, form }
 
@@ -13,7 +17,7 @@ class ExpensesContainer extends StatefulWidget {
 }
 
 class _ExpensesContainerState extends State<ExpensesContainer> {
-  final List<Expense> _expenses = [];
+  final AppState _appState = getIt<AppState>(); // GetIt доступ
   Screen _currentScreen = Screen.list;
 
   void _showList() {
@@ -31,35 +35,31 @@ class _ExpensesContainerState extends State<ExpensesContainer> {
     required String category,
     String? description,
   }) {
-    setState(() {
-      final newExpense = Expense(
-        id: DateTime.now().microsecondsSinceEpoch.toString(),
-        title: title,
-        amount: amount,
-        date: date,
-        category: category,
-        description: description,
-      );
-      _expenses.add(newExpense);
-      _expenses.sort((a, b) => b.date.compareTo(a.date));
-      _currentScreen = Screen.list;
-    });
-  }
-
-  void _deleteExpense(String id) {
-    setState(() {
-      _expenses.removeWhere((expense) => expense.id == id);
-    });
+    final newExpense = Expense(
+      id: DateTime.now().microsecondsSinceEpoch.toString(),
+      title: title,
+      amount: amount,
+      date: date,
+      category: category,
+      description: description,
+    );
+    _appState.addExpense(newExpense);
+    _showList();
   }
 
   @override
   Widget build(BuildContext context) {
+    return AppInheritedWidget( // InheritedWidget доступ
+      appState: _appState,
+      child: _buildCurrentScreen(),
+    );
+  }
+
+  Widget _buildCurrentScreen() {
     switch (_currentScreen) {
       case Screen.list:
         return ExpensesListScreen(
-          expenses: _expenses,
           onAdd: _showForm,
-          onDelete: _deleteExpense,
         );
       case Screen.form:
         return ExpenseFormScreen(

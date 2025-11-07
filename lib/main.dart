@@ -1,8 +1,11 @@
+// main.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_flutter_6/config/router.dart';
+import 'di/locator.dart';
 
 void main() {
+  setupLocator(); // Инициализируем GetIt
   runApp(const MyApp());
 }
 

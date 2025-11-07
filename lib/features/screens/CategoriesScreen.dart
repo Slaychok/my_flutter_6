@@ -50,12 +50,9 @@ class CategoriesScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Возврат к основному экрану списка расходов
-          // Используем pushReplacement для горизонтальной навигации обратно
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (ctx) => const Scaffold(), // Здесь должен быть ваш основной экран
-              // В реальном приложении здесь должен быть возврат к ExpensesListScreen
+              builder: (ctx) => const Scaffold(),
             ),
           );
         },

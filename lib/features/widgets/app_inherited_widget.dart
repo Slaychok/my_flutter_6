@@ -1,6 +1,5 @@
-// features/widgets/app_inherited_widget.dart
 import 'package:flutter/material.dart';
-import '../state/app_state.dart';
+import 'package:my_flutter_6/features/state/app_state.dart';
 
 class AppInheritedWidget extends InheritedWidget {
   final AppState appState;

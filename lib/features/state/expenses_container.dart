@@ -17,7 +17,7 @@ class ExpensesContainer extends StatefulWidget {
 }
 
 class _ExpensesContainerState extends State<ExpensesContainer> {
-  final AppState _appState = getIt<AppState>(); // GetIt доступ
+  final AppState _appState = getIt<AppState>(); // Исправлено: getIt вместо serviceLocator
   Screen _currentScreen = Screen.list;
 
   void _showList() {

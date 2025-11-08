@@ -1,3 +1,4 @@
+// features/state/app_state.dart
 import 'package:flutter/material.dart';
 import '../models/expense.dart';
 
@@ -5,6 +6,10 @@ class AppState extends ChangeNotifier {
   final List<Expense> _expenses = [];
 
   List<Expense> get expenses => List.unmodifiable(_expenses);
+
+  double get totalAmount {
+    return _expenses.fold(0, (sum, expense) => sum + expense.amount);
+  }
 
   void addExpense(Expense expense) {
     _expenses.add(expense);
@@ -15,10 +20,6 @@ class AppState extends ChangeNotifier {
   void deleteExpense(String id) {
     _expenses.removeWhere((expense) => expense.id == id);
     notifyListeners();
-  }
-
-  double get totalAmount {
-    return _expenses.fold(0, (sum, expense) => sum + expense.amount);
   }
 
   Map<String, double> getCategoryTotals() {

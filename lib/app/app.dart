@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'features/state/expenses_container.dart';
+import '../features/state/expenses_container.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
